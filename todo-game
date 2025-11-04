@@ -1,0 +1,59 @@
+todo_list = []
+
+def show():
+    if not todo_list:
+        print(" No tasks ") 
+    else:
+        for i,task in enumerate(todo_list , start = 1):
+            status = "✅" if task["done"] else "❌"
+            print(f"{i}. {task["task"]} [{status}]")
+    
+def adding():
+    task = input("Enter your task: ")
+    todo_list.append({"task": task, "done": False})
+    print('task added')
+def remove():
+    show()
+    try:
+       index = int(input(" Enter task number to remove: ")) - 1
+       remove = todo_list.pop(index)
+       print(f"Removed: {remove["task"]}")
+    except (IndexError, ValueError):
+        print("Invailed task number.")
+def mark():
+    show()
+    try:
+        index = int(input("enter task number to mark as done: ")) -1
+        todo_list[index]["done"] = True
+        print(f"marked as done: {todo_list[index]['task']}")
+    except(IndexError,ValueError):
+        print("Invaild task numder: ")
+
+
+def menu():
+    print("To Do List")
+    print("----------------")
+    print("1. View To-Do List")
+    print("2. Add Task")
+    print("3. Remove Task")
+    print("4. Mark Task as Done")
+    print("5. Exit")
+
+
+while True:
+    menu()
+    choose = int(input("enter your choice(1-5): "))
+    if choose == 1:
+        show()
+    elif choose == 2:
+        adding()
+    elif choose == 3:
+        remove()
+    elif choose == 4:
+        mark()
+    elif choose== 5 :
+        print("Goodbye")
+        break
+    
+    else:
+        print("Invaile choice. enter between 1-5:")
